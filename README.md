@@ -2,6 +2,8 @@
 
 > **Currently in BETA and under active development.**
 
+> **Thanks n8n-ninja! I just fixed the language output for non-english requests**
+
 This n8n community node enables seamless integration of **[ElevenLabs](http://go.n8n.ninja/elevenlabs) in your [n8n](http://go.n8n.ninja/tryn8n) workflows**.
 
 **[ElevenLabs](http://go.n8n.ninja/elevenlabs)** offers cutting-edge, contextually aware AI voices, allowing you to generate lifelike speech in hundreds of unique and familiar voices across dozens of languages.
@@ -36,3 +38,5 @@ To use this node, you need to have an [elevenlabs.io](http://go.n8n.ninja/eleven
 
 - [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
 - [elevenlabs api documentation](https://elevenlabs.io/docs/api-reference/getting-started)
+
+

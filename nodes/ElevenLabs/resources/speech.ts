@@ -115,7 +115,19 @@ export const SpeechOperations: INodeProperties[] = [
 		},
 		required: true,
 	},
-
+	// model_id
+	{
+		displayName: 'Model Name or ID',
+		description:
+			'Identifier of the model that will be used. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+		name: 'model_id',
+		type: 'options',
+		typeOptions: {
+			loadOptionsMethod: 'listModels',
+		},
+		default: '',
+		required: true,
+	},
 	// Additional fields
 	{
 		displayName: 'Additional Fields',
@@ -163,18 +175,6 @@ export const SpeechOperations: INodeProperties[] = [
 				name: 'output_format',
 				type: 'string',
 				default: 'mp3_44100_128',
-			},
-			// model_id
-			{
-				displayName: 'Model Name or ID',
-				description:
-					'Identifier of the model that will be used. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
-				name: 'model_id',
-				type: 'options',
-				typeOptions: {
-					loadOptionsMethod: 'listModels',
-				},
-				default: 'eleven_multilingual_v2',
 			},
 			// stability
 			{
@@ -240,6 +240,15 @@ export const SpeechOperations: INodeProperties[] = [
 				type: 'boolean',
 				default: true,
 			},
+			// language code
+			{
+				displayName: 'Language Code',
+				description:
+					'Language code (ISO 639-1). Only for Turbo v2.5! other models, will return an error if a language code is provided.',
+				name: 'language_code',
+				type: 'string',
+				default: '',
+			},
 		],
 	},
 ];
@@ -262,18 +271,20 @@ async function preSendText(
 	requestOptions: IHttpRequestOptions,
 ): Promise<IHttpRequestOptions> {
 	const text = this.getNodeParameter('text') as string;
-	const model_id = this.getNodeParameter('model_id', null) as string;
+	const model_id = this.getNodeParameter('model_id') as string;
 	const seed = this.getNodeParameter('seed', 0) as string;
 
 	const stability = this.getNodeParameter('additionalFields.stability', 0.5);
-	const similarity_boost = this.getNodeParameter('additionalFields.similarity_boost', 1);
+	const similarity_boost = this.getNodeParameter('additionalFields.similarity_boost', 0.75);
 	const style = this.getNodeParameter('additionalFields.style', 0);
 	const use_speaker_boost = this.getNodeParameter('additionalFields.use_speaker_boost', true);
 	const stitching = this.getNodeParameter('additionalFields.stitching', false);
+	const language_code = this.getNodeParameter('language_code.', '');
 
 	const data: any = {
 		text: text,
 		model_id: model_id,
+		language_code: language_code,
 		voice_settings: {
 			stability: stability,
 			similarity_boost: similarity_boost,

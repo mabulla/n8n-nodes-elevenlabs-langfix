@@ -1,11 +1,11 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { listSearch } from './methods/listSearch';
 import { loadOptions } from './methods/loadOptions';
-// import { debugRequest } from './methods/debugRequest';
 import { HistoryOperations } from './resources/history';
 import { SpeechOperations } from './resources/speech';
 import { UserOperations } from './resources/user';
 import { VoiceOperations } from './resources/voice';
+import { debugRequest } from './methods/debugRequest';
 
 export class ElevenLabs implements INodeType {
 	description: INodeTypeDescription = {
@@ -36,9 +36,7 @@ export class ElevenLabs implements INodeType {
 		},
 		properties: [
 			{
-				displayName: `This node is currently in <b>BETA</b> and under active development.<br/>
-				<a href="http://go.n8n.ninja/811" target="_blank">Visit this page</a> for more information or <a href="http://go.n8n.ninja/x" target="_blank">contact the n8Ninja on X</a>.<br/><br/>
-				To support my work, please <a href="https://youtu.be/R2qFRdu8CMY" target="_blank">share this youtube video</a> 🥷🙏`,
+				displayName: `This node is currently in <b>BETA</b> and under "active" development.<br/>`,
 				name: 'notice',
 				type: 'notice',
 				default: '',
@@ -67,11 +65,11 @@ export class ElevenLabs implements INodeType {
 					},
 				],
 				default: 'speech',
-				// routing: {
-				// 	send: {
-				// 		preSend: [debugRequest],
-				// 	},
-				// },
+				routing: {
+					send: {
+						preSend: [debugRequest],
+					},
+				},
 			},
 
 			...SpeechOperations,
