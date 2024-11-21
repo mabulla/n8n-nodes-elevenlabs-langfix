@@ -1,7 +1,7 @@
 {
-	"name": "n8n-nodes-elevenlabs",
-	"version": "0.0.4",
-	"description": "Complete implementation of ElevenLabs AI voice generation into n8n workflows.",
+	"name": "@mabulla/n8n-nodes-elevenlabs-langfix",
+	"version": "0.0.5",
+	"description": "Maybe fixed and perhaps still complete implementation of ElevenLabs AI voice generation into n8n workflows.",
 	"keywords": [
 		"n8n-community-node-package",
 		"n8n",
@@ -13,23 +13,29 @@
 		"tts"
 	],
 	"license": "MIT",
-	"homepage": "https://n8n.ninja",
+	"homepage": "https://mabul.la",
 	"author": {
-		"name": "n8ninja",
-		"email": "n8n.ninja@gmail.com"
+		"name": "mabulla",
+		"email": "info@mabul.la"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/n8n-ninja/n8n-nodes-elevenlabs"
+		"url": "git+https://github.com/mabulla/n8n-nodes-elevenlabs-langfix.git"
 	},
+	"engines": {
+		"node": ">=18.10",
+		"pnpm": ">=9.1"
+	},
+	"packageManager": "pnpm@9.1.4",
 	"main": "index.js",
 	"scripts": {
+		"preinstall": "npx only-allow pnpm",
 		"build": "tsc && gulp build:icons",
 		"dev": "tsc --watch",
 		"format": "prettier nodes credentials --write",
 		"lint": "eslint nodes credentials package.json",
 		"lintfix": "eslint nodes credentials package.json --fix",
-		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json",
+		"prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json",
 		"runn8n": "npx nodemon -q -e js,ts,yml,yaml,json,node,graphql,env,env.sample --exec  n8n start"
 	},
 	"files": [
@@ -46,18 +52,23 @@
 	},
 	"devDependencies": {
 		"@types/node": "^20.12.8",
-		"@typescript-eslint/parser": "~5.45",
+		"@typescript-eslint/parser": "^7.15.0",
+		"eslint": "^8.56.0",
 		"eslint-plugin-n8n-nodes-base": "^1.16.1",
 		"gulp": "^4.0.2",
 		"i": "^0.3.7",
 		"n8n-workflow": "*",
-		"prettier": "^2.7.1",
-		"typescript": "~4.8.4"
+		"prettier": "^3.3.2",
+		"typescript": "^5.5.3"
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
 	},
 	"dependencies": {
+		"@mabulla/n8n-nodes-elevenlabs-langfix": "link:",
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0"
+	},
+	"bugs": {
+		"url": "https://github.com/mabulla/n8n-nodes-elevenlabs-langfix/issues"
 	}
 }
