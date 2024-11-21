@@ -1,6 +1,6 @@
 {
 	"name": "@mabulla/n8n-nodes-elevenlabs-langfix",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Maybe fixed and perhaps still complete implementation of ElevenLabs AI voice generation into n8n workflows.",
 	"keywords": [
 		"n8n-community-node-package",
